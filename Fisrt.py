@@ -1,8 +1,21 @@
-s = [int(i) for i in open('17_21416.txt')]
-mn = sum(i for i in s if i < 0)
-res = []
-for i in range(len(s)-2):
-    x,y,z = s[i], s[i+1], s[i+2]
-    if max(x, y, z)*min(x, y, z) > mn:
-        res.append(x+y+z)
-print(len(res), max(res))
+def divs(n):
+    s = set()
+    for i in range(2, int(n**0.5)+1):
+        if n % i == 0:
+            if prost(i) and i % 1000 == 777:
+                s.add(i)
+            if prost(n//i)  and n//i % 1000 == 777:
+                s.add(n//i)
+    return sorted(s)
+
+def prost(n):
+    if n ==1:
+        return False
+    for i in range(2, int(n ** 0.5) + 1):
+        if n % i == 0:
+            return False
+    return True
+for i in range(55_000_000, 56_000_000):
+    d = divs(i)
+    if len(d)>0:
+        print(i, d[0])
